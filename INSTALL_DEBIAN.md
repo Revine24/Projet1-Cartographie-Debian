@@ -59,7 +59,7 @@ La commande ss -tunlp confirme que les services Apache et vsftpd sont en état d
 
 **Commande :** `ss -tunlp`
 
->> ![Analyse des ports en écoute](./SCREENSHOTS_DEBIAN/06_ports_locaux.png)
+> ![Analyse des ports en écoute](./SCREENSHOTS_DEBIAN/06_ports_locaux.png)
 
 ### 5.2 Scan de reconnaissance distant (Nmap)
 Un scan de découverte a été réalisé depuis la machine attaquante du laboratoire (UBU01 - 172.16.10.20). Les résultats valident l'ouverture effective et la visibilité des ports 21 (FTP) et 80 (HTTP) depuis le réseau.
