@@ -1,6 +1,6 @@
 # Rapport Technique : Analyse et Cartographie des Ports Réseau
 **Projet :** TSSR - Sprint 1 (Infrastructure et Vulnérabilisation)
-**Auteur :** [Revine]
+**Auteur :** Revine
 **Cible :** SRVLX01 (Debian 13)
 
 ---
