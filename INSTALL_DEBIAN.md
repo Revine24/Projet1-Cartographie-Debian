@@ -70,5 +70,5 @@ Un scan de découverte a été réalisé depuis la machine attaquante du laborat
 
 ---
 
-### Conclusion : 
+## Conclusion : 
 La cible SRVLX01 est opérationnelle. L'isolation réseau est effective et les services vulnérables sont correctement exposés.
