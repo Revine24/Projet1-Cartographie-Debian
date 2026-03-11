@@ -1,59 +1,39 @@
-# Rapport Technique : Configuration de la Cible SRVLX01
-## Sprint 1 : Préparation de l'environnement et déploiement de services
-
-### 1. Environnement réseau
-La machine virtuelle SRVLX01 (Debian 13) est isolée sur un réseau interne segmenté. La configuration de l'hyperviseur autorise le mode promiscuité pour les besoins de l'audit réseau.
-
-* **Segment réseau :** intnet (Internal Network)
-* **Mode Promiscuité :** Allow All
-
-> **Figure 1 : Configuration de l'interface réseau (VirtualBox)**
-> ![Configuration Réseau](./SCREENSHOTS_DEBIAN/01_config_reseau_Vbox.png)
+# Rapport Technique : Analyse et Cartographie des Ports Réseau
+**Projet :** TSSR - Sprint 1 (Infrastructure et Vulnérabilisation)
+**Auteur :** [Ton Nom]
+**Cible :** SRVLX01 (Debian 13)
 
 ---
 
-### 2. Configuration IP et Identité
-L'adressage IP a été fixé statiquement afin de garantir la persistance de la cible lors des phases de scan. 
+## I. Introduction et Contexte
+Dans le cadre de ce projet de cartographie réseau, ma mission consiste à préparer une cible Linux (Debian 13) au sein d'une infrastructure virtualisée. L'objectif est d'implémenter des services spécifiques afin de simuler des vulnérabilités exploitables lors des phases d'audit et de reconnaissance réseau du Sprint 2.
 
-* **Hostname :** SRVLX01
-* **IP Address :** 172.16.10.6/24
-* **Credentials :** root / Azerty1*
+## II. Architecture Réseau et Isolation
+La machine virtuelle est déployée sous l'hyperviseur VirtualBox. Pour garantir l'étanchéité de l'environnement de test et permettre une analyse de trafic non filtrée (indispensable pour Nmap), la configuration suivante a été appliquée sur l'interface secondaire :
 
-**Procédure :** Modification du fichier `/etc/network/interfaces`.
+* **Adaptateur 2 :** Réseau interne (`intnet`)
+* **Mode Promiscuité :** "Autoriser tout"
 
-> **Figure 2 : Paramétrage de l'adresse statique**
-> ![Config Nano](./SCREENSHOTS_DEBIAN/02_fichier_interfaces.png)
+> ![Configuration Réseau VirtualBox](./01_config_reseau_Vbox.png)
 
-> **Figure 3 : Vérification de l'état de l'interface enp0s8**
-> ![IP Active](./SCREENSHOTS_DEBIAN/03_ip_active.png)
+## III. Configuration de la Couche Réseau (OS)
+### 3.1 Adressage IP Statique
+Pour assurer la persistance de l'hôte lors des scans de découverte, j'ai configuré l'interface `enp0s8` en adressage statique via l'édition du fichier `/etc/network/interfaces`.
 
----
+* **IPv4 :** 172.16.10.6
+* **Masque :** 255.255.255.0
 
-### 3. Services et Vulnérabilités implémentés
-Deux services ont été installés pour simuler des vecteurs d'attaque standards (flux non chiffrés).
+> ![Édition du fichier interfaces](./02_fichier_interfaces.png)
 
-#### 3.1. Serveur Web Apache2 (Port 80)
-Installation du service HTTP pour l'exposition de bannières applicatives.
-* **Commande :** `apt install apache2 -y`
-> ![Installation Apache](./SCREENSHOTS_DEBIAN/04_install_apache.png)
+### 3.2 Validation de l'état de l'interface
+Après application de la configuration et redémarrage du service `networking`, la commande `ip a` confirme que l'interface est opérationnelle ("UP") et l'adressage correct.
 
-#### 3.2. Serveur FTP vsftpd (Port 21)
-Installation du service de transfert de fichiers pour simuler une faille d'authentification en clair.
-* **Commande :** `apt install vsftpd -y`
-> ![Installation FTP](./SCREENSHOTS_DEBIAN/05_install_ftp.png)
+> ![Vérification IP active](./03_ip_active.png)
 
-#### 3.3. Contrôle des ports ouverts
-Le pare-feu (UFW) est désactivé pour permettre l'énumération complète. La commande `ss -tunlp` confirme l'écoute des processus sur les ports 21 et 80.
-> ![Ports Locaux](./SCREENSHOTS_DEBIAN/06_ports_locaux.png)
+## IV. Implémentation des Services et Vulnérabilisation
+Conformément au Product Backlog, j'ai procédé à l'installation de deux daemons exposant des ports TCP critiques pour simuler une surface d'exposition vulnérable.
 
----
-
-### 4. Validation par audit distant (Scan Nmap)
-Un scan de reconnaissance a été effectué depuis la machine d'audit (UBU01 - 172.16.10.20) pour valider la visibilité des services.
-
-**Commande :** `nmap 172.16.10.6`
-
-> **Figure 4 : Résultat du scan de ports distant**
-> ![Scan Nmap Final](./SCREENSHOTS_DEBIAN/07_audit_nmap_final.png)
-
-**Conclusion :** La cible SRVLX01 répond correctement aux sollicitations réseau. Les ports 21/tcp et 80/tcp sont confirmés comme étant ouverts.
+### 4.1 Service HTTP (Apache2) - Port 80
+Installation du serveur Web Apache pour simuler une interface de gestion accessible sans chiffrement.
+```bash
+apt update && apt install apache2 -y
