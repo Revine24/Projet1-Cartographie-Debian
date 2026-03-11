@@ -1,70 +1,59 @@
-# 🛡️ Projet 1 : Analyse et Cartographie Réseau - Sprint 1
-## 🎯 Cible : SRVLX01 (Debian Server)
+# Rapport Technique : Configuration de la Cible SRVLX01
+## Sprint 1 : Préparation de l'environnement et déploiement de services
 
-### 📋 Présentation de la mission
-Dans le cadre du premier sprint de notre projet d'audit réseau, mon rôle consistait à préparer la machine cible **Debian 13 (SRVLX01)**. L'objectif est d'isoler cette machine sur notre réseau de laboratoire et d'y injecter délibérément des vulnérabilités (services non sécurisés) afin de pouvoir les cartographier par la suite.
+### 1. Environnement réseau
+La machine virtuelle SRVLX01 (Debian 13) est isolée sur un réseau interne segmenté. La configuration de l'hyperviseur autorise le mode promiscuité pour les besoins de l'audit réseau.
 
----
+* **Segment réseau :** intnet (Internal Network)
+* **Mode Promiscuité :** Allow All
 
-## 🏗️ 1. Configuration de l'Infrastructure et du Réseau
-Pour isoler nos tests et permettre l'écoute des paquets réseau, la machine virtuelle a été configurée sur un commutateur interne spécifique.
-
-* **Réseau Interne :** `intnet`
-* **Mode Promiscuité :** `Autoriser tout` (Indispensable pour l'analyse de trames).
-
-> **Preuve matérielle (VirtualBox) :**
+> **Figure 1 : Configuration de l'interface réseau (VirtualBox)**
 > ![Configuration Réseau](./SCREENSHOTS_DEBIAN/01_config_reseau_Vbox.png)
 
 ---
 
-## ⚙️ 2. Personnalisation de l'Identité et Adressage IP
-Afin de garantir la stabilité des scans Nmap, la cible doit posséder une adresse IP statique. J'ai édité manuellement la configuration réseau du système d'exploitation. L'accès administrateur a également été verrouillé avec le mot de passe du projet (`Azerty1*`).
+### 2. Configuration IP et Identité
+L'adressage IP a été fixé statiquement afin de garantir la persistance de la cible lors des phases de scan. 
 
-**Commande exécutée :** `sudo nano /etc/network/interfaces`
+* **Hostname :** SRVLX01
+* **IP Address :** 172.16.10.6/24
+* **Credentials :** root / Azerty1*
 
-> **Édition du fichier de configuration réseau :**
+**Procédure :** Modification du fichier `/etc/network/interfaces`.
+
+> **Figure 2 : Paramétrage de l'adresse statique**
 > ![Config Nano](./SCREENSHOTS_DEBIAN/02_fichier_interfaces.png)
 
-Après un redémarrage du service réseau, l'interface `enp0s8` a correctement récupéré l'adresse `172.16.10.6`.
-
-> **Vérification de l'interface active :**
+> **Figure 3 : Vérification de l'état de l'interface enp0s8**
 > ![IP Active](./SCREENSHOTS_DEBIAN/03_ip_active.png)
 
 ---
 
-## 🔓 3. Implémentation des Failles de Sécurité
-Pour simuler une cible réaliste, j'ai déployé deux services critiques souvent visés par les audits de sécurité. 
+### 3. Services et Vulnérabilités implémentés
+Deux services ont été installés pour simuler des vecteurs d'attaque standards (flux non chiffrés).
 
-### A. Serveur Web (Port 80 HTTP)
-Installation d'un serveur Web Apache2 tournant en clair, sans certificat de sécurité.
-**Commande exécutée :** `apt install apache2 -y`
-
-> **Validation du déploiement Apache :**
+#### 3.1. Serveur Web Apache2 (Port 80)
+Installation du service HTTP pour l'exposition de bannières applicatives.
+* **Commande :** `apt install apache2 -y`
 > ![Installation Apache](./SCREENSHOTS_DEBIAN/04_install_apache.png)
 
-### B. Service de transfert de fichiers (Port 21 FTP)
-Installation du service `vsftpd`. Le protocole FTP est une vulnérabilité majeure car il transmet les données et les identifiants en clair.
-**Commande exécutée :** `apt install vsftpd -y`
-
-> **Validation du déploiement FTP :**
+#### 3.2. Serveur FTP vsftpd (Port 21)
+Installation du service de transfert de fichiers pour simuler une faille d'authentification en clair.
+* **Commande :** `apt install vsftpd -y`
 > ![Installation FTP](./SCREENSHOTS_DEBIAN/05_install_ftp.png)
 
-### C. Vérification locale des services
-Pour s'assurer que les services tournent correctement, le pare-feu système a été désactivé (`ufw disable`) et les sockets en écoute ont été listés.
-
-**Commande exécutée :** `ss -tunlp`
-
-> **Ports 21 et 80 en écoute (État LISTEN) :**
+#### 3.3. Contrôle des ports ouverts
+Le pare-feu (UFW) est désactivé pour permettre l'énumération complète. La commande `ss -tunlp` confirme l'écoute des processus sur les ports 21 et 80.
 > ![Ports Locaux](./SCREENSHOTS_DEBIAN/06_ports_locaux.png)
 
 ---
 
-## 🔍 4. Validation de la Cible (Preuve d'Audit)
-L'ultime étape du Sprint 1 consiste à prouver que les vulnérabilités créées sont bien exploitables depuis l'extérieur. Un scan réseau a été lancé depuis notre machine d'attaque (**UBU01** - IP : 172.16.10.20).
+### 4. Validation par audit distant (Scan Nmap)
+Un scan de reconnaissance a été effectué depuis la machine d'audit (UBU01 - 172.16.10.20) pour valider la visibilité des services.
 
-**Commande d'audit :** `nmap 172.16.10.6`
+**Commande :** `nmap 172.16.10.6`
 
-> **Résultat de l'analyse réseau :**
+> **Figure 4 : Résultat du scan de ports distant**
 > ![Scan Nmap Final](./SCREENSHOTS_DEBIAN/07_audit_nmap_final.png)
 
-**✅ Conclusion :** Nmap confirme de manière formelle que les ports **21/tcp (ftp)** et **80/tcp (http)** sont **OUVERTS**. Le serveur SRVLX01 est parfaitement configuré et vulnérabilisé pour la suite du projet.
+**Conclusion :** La cible SRVLX01 répond correctement aux sollicitations réseau. Les ports 21/tcp et 80/tcp sont confirmés comme étant ouverts.
