@@ -1,39 +1,45 @@
 # Rapport Technique : Analyse et Cartographie des Ports Réseau
-**Projet :** TSSR - Sprint 1 (Infrastructure et Paramétrage)
+**Projet :** TSSR - Sprint 1 (Infrastructure et Vulnérabilisation)
 **Technicien :** Revine
 **Cible :** SRVLX01 (Debian 13)
 
 ---
 
 ## I. Introduction et Contexte
-L'objectif de ce premier sprint est la mise en place d'une infrastructure virtualisée pour tester la communication réseau entre différents hôtes. Ma mission s'est concentrée sur la préparation de la machine cible Debian, son adressage IP statique et l'activation de services réseaux spécifiques pour vérifier la visibilité des ports.
+Dans le cadre du projet d'analyse réseau de l'Équipe 3, ma mission consiste à préparer une cible Linux (Debian 13) isolée. L'objectif est d'implémenter des services spécifiques afin de simuler des vulnérabilités exploitables lors des phases d'audit. Ce document détaille la configuration système et l'ouverture des vecteurs d'attaque.
 
 ## II. Architecture Réseau et Isolation
-La machine virtuelle est déployée sous VirtualBox. Afin de placer la machine dans le réseau de l'équipe (L'équipe 3), la configuration suivante a été appliquée :
+La machine virtuelle est déployée sous VirtualBox. Pour garantir l'étanchéité de l'environnement de test et permettre une analyse de trafic non filtrée par l'hyperviseur, la configuration suivante a été appliquée :
 
-* **Adaptateur 2 :** Réseau interne (`intnet`).
-* **Mode Promiscuité :** "Autoriser tout".
+* **Mode d'accès :** Réseau interne (`intnet`)
+* **Mode Promiscuité :** "Autoriser tout"
 
 > ![Configuration Réseau VirtualBox](./SCREENSHOTS_DEBIAN/01_config_reseau_Vbox.png)
 
 ## III. Configuration de la Couche Réseau (OS)
 ### 3.1 Adressage IP Statique
-Pour garantir que la machine conserve la même identité sur le réseau, j'ai configuré l'interface `enp0s8` manuellement via le fichier `/etc/network/interfaces`.
+Afin d'assurer la persistance de l'hôte lors des scans de découverte, l'interface `enp0s8` a été configurée en adressage statique via l'édition du fichier `/etc/network/interfaces`.
+
+**Commande :** `sudo nano /etc/network/interfaces`
 
 * **IPv4 :** 172.16.10.6
 * **Masque :** 255.255.255.0
 
 > ![Édition du fichier interfaces](./SCREENSHOTS_DEBIAN/02_fichier_interfaces.png)
 
-### 3.2 Validation de l'interface
-Après le redémarrage du service, la commande `ip a` confirme que l'interface est active et correctement adressée.
+### 3.2 Validation de l'état de l'interface
+Après application des paramètres et redémarrage du service networking, la commande `ip a` confirme que l'interface est opérationnelle ("UP") et possède l'adressage IP cible.
 
-> ![Vérification de l'IP active](./SCREENSHOTS_DEBIAN/03_ip_active.png)
+**Commande :** `ip a`
 
-## IV. Installation et Paramétrage des Services
-J'ai procédé à l'installation de deux services pour ouvrir les ports correspondants sur le réseau interne.
+> ![Vérification IP active](./SCREENSHOTS_DEBIAN/03_ip_active.png)
 
-### 4.1 Service Web (Apache2) - Port 80
-Installation du serveur Apache pour ouvrir le port HTTP.
+---
+
+## IV. Implémentation des Services (Vulnérabilisation)
+Conformément au planning du Sprint 1, j'ai procédé à l'installation de deux daemons exposant des ports TCP critiques pour simuler une surface d'attaque.
+
+### 4.1 Serveur HTTP (Apache2) - Port 80
+Installation du serveur Web Apache pour simuler une interface de gestion non sécurisée.
 ```bash
 apt update && apt install apache2 -y
