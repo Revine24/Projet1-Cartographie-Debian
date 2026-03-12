@@ -68,6 +68,11 @@ Un scan de découverte a été réalisé depuis la machine attaquante du laborat
 
 > ![Résultat du scan Nmap](./SCREENSHOTS_DEBIAN/07_audit_nmap_final.png)
 
+### 5.3 Test de réponse applicative (HTTP)
+La connectivité est confirmée par l'accès à la page par défaut d'Apache depuis le navigateur de la machine d'attaque, prouvant que le service est fonctionnel.
+
+> ![Test de connexion Web](./SCREENSHOTS_DEBIAN/08_test_apache_web.png)
+
 ---
 
 ## Conclusion : 
