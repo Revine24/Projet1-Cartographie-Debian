@@ -10,6 +10,6 @@ Ce dépôt contient la configuration et la documentation technique de la machine
 
 ## 📄 Documentation détaillée
 Le rapport complet de configuration avec les captures d'écran est disponible ici : 
-👉 **[Accéder au rapport d'installation (install_debian.md)](./install_debian.md)**
+👉 **[Accéder au rapport d'installation (install_debian.md)](INSTALL_DEBIAN.md)**
 
 ---
