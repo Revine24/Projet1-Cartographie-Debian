@@ -76,7 +76,7 @@ La connectivité est confirmée par l'accès à la page par défaut d'Apache dep
 ### Étape 5.4 : Test de bannière de service (FTP)
 La réponse du service est confirmée par la récupération de la bannière vsFTPd via l'outil Netcat depuis la machine d'attaque, prouvant que le service de transfert de fichiers est opérationnel et prêt à l'emploi.
 
-![Test de connexion 220 vsFTPd](Ressources/Ouverture-port-debian/SCREENSHOTS_DEBIAN/09_test_service_FTP.png)
+![Test de connexion 220 vsFTPd](./SCREENSHOTS_DEBIAN/09_test_service_FTP.png)
 
 ---
 
