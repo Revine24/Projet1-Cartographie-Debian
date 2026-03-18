@@ -55,7 +55,7 @@ http://172.16.10.6
 
 La connectivité est confirmée si vous arrivez sur la page par défaut d'Apache.
 
-mettre le screen ici
+![Test de connexion Web](Ressources/Ouverture-port-debian/SCREENSHOTS_DEBIAN/08_test_apache_web.png)
 
 **Vérification du Port 21 (FTP) :**
 
@@ -66,7 +66,7 @@ nc 172.16.10.6 21
 
 La réponse du service est confirmée si le serveur vous renvoie la "bannière" (le message d'accueil) de vsFTPd, prouvant qu'il est prêt à l'emploi.
 
-mettre le screen ici
+![Test de connexion 220 vsFTPd](Ressources/Ouverture-port-debian/SCREENSHOTS_DEBIAN/09_test_service_FTP.png)
 
 
 
