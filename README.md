@@ -8,7 +8,7 @@ Afin de simplifier l'utilisation de Nmap (qui possède beaucoup d'options comple
 ### 2. Comment le lancer
 Ouvrez un terminal sur votre machine d'attaque (par exemple notre machine Ubuntu UBU01 - 172.16.10.20), allez dans le dossier du projet, puis exécutez simplement le script avec les droits administrateur :
 
-```bash nmap.sh
+```bash nmap.sh```
 
 ### 3. Ce qu'il faut saisir
 
@@ -33,8 +33,8 @@ Une fois que le script vous a montré que les ports sont ouverts, vous pouvez v�
 
 **Vérification du Port 80 (Web) :**
 Ouvrez le navigateur internet de la machine d'attaque et tapez :
-```http://172.16.10.6
+```http://172.16.10.6```
 La connectivité est confirmée si vous arrivez sur la page par défaut d'Apache.
 
 ##Vérification du Port 21 (FTP) :**
-Dans votre terminal, tapez la commande ```nc 172.16.10.6 21. La réponse du service est confirmée si le serveur vous renvoie la "bannière" (le message d'accueil) de vsFTPd, prouvant qu'il est prêt à l'emploi.
+Dans votre terminal, tapez la commande ```nc 172.16.10.6 21```. La réponse du service est confirmée si le serveur vous renvoie la "bannière" (le message d'accueil) de vsFTPd, prouvant qu'il est prêt à l'emploi.
