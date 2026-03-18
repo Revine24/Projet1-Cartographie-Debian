@@ -59,7 +59,7 @@ Pour les utilisateurs avancés, voici les commandes et options que le script ex�
 - **Le bruit (Vitesse) :**
 ```De T0 (très discret) à T4 (très rapide/agressif).```
 
-- **Les sorties : **
+- **Les sorties :**
     ```--oN <filename> - Normal output
     -oX <filename> - XML output 
     -oG <filename> - grep-able output (useful for grep and awk)```-
