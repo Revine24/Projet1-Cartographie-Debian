@@ -14,10 +14,10 @@ Ouvrez un terminal sur votre machine d'attaque (par exemple notre machine Ubuntu
 
 Une fois lancé, le script fonctionne comme un menu interactif. Il va vous demander de taper un numéro pour choisir vos options :
 
-- **Le type de scan :** Choisissez la méthode (ex: `1` pour un scan rapide, `2` pour un scan complet).
-- **La vitesse du scan :** Choisissez de `T1` (très lent) à `T5` (très rapide). ⚠️ Attention : plus le scan est rapide, plus il risque de se faire repérer et bloquer par un pare-feu.
-- **Le niveau d'information :** Choisissez la quantité de détails affichés (Normal, Verbeux, ou Très verbeux).
-- **Les options supplémentaires :** Choisissez si vous voulez forcer la détection de la version des logiciels ou du système d'exploitation (OS).
+- **Le type de scan que l'on veut.**
+- **La vitesse du scan :** Attention : plus le scan est rapide, plus il risque de se faire repérer et bloquer par un pare-feu.
+- **Le niveau d'information que va retourner le scan.**
+- **Les options supplémentaires, notament le recherche de version ou d'OS**
 - **L'adresse IP :** Enfin, tapez l'adresse de la cible (par exemple `172.16.10.6` pour notre serveur Debian) et appuyez sur Entrée.
 
 ### 4. Comment lire les résultats
