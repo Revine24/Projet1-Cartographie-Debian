@@ -28,7 +28,8 @@ Une fois lancé, le script fonctionne comme un menu interactif. Il va vous deman
 - **Le niveau d'information que va retourner le scan.**
 - **Les options supplémentaires, notamment la recherche de version ou d'OS**
 - **L'adresse IP :** Enfin, tapez l'adresse de la cible (par exemple `172.16.10.6` pour notre serveur Debian) et appuyez sur Entrée.
-
+- 
+mettre le screen ici
 ---
 
 ### 4. Comment lire les résultats
@@ -37,7 +38,8 @@ Une fois lancé, le script fonctionne comme un menu interactif. Il va vous deman
 
 - **Cible Windows :** Vous verrez notamment les ports **139** et **445** (partage de fichiers) ouverts.
 - **Cible Linux :** Vous verrez notamment les ports **21** (FTP) et **80** (HTTP) ouverts.
-
+- 
+mettre le screen ici
 ---
 
 ### 5. Exemple simple : Vérification manuelle
@@ -53,6 +55,8 @@ http://172.16.10.6
 
 La connectivité est confirmée si vous arrivez sur la page par défaut d'Apache.
 
+mettre le screen ici
+
 **Vérification du Port 21 (FTP) :**
 
 Dans votre terminal, tapez la commande :
@@ -61,6 +65,8 @@ nc 172.16.10.6 21
 ```
 
 La réponse du service est confirmée si le serveur vous renvoie la "bannière" (le message d'accueil) de vsFTPd, prouvant qu'il est prêt à l'emploi.
+
+mettre le screen ici
 
 ---
 
