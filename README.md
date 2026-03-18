@@ -42,24 +42,24 @@ Dans votre terminal, tapez la commande ```nc 172.16.10.6 21```. La réponse du s
 ### 6. Détails des commandes Nmap utilisées
 Pour les utilisateurs avancés, voici les commandes et options que le script exécute automatiquement selon vos choix :
 
-## Les types de scans principaux :**
+Les types de scans principaux :
 
 ```nmap -sn``` : Scan de découverte (pour voir qui est en ligne).
 ```nmap -sT``` : Scan TCP complet (3-way handshake).
 ```nmap -sS``` : Scan SYN (plus discret).
 ```nmap -sU``` : Scan des ports UDP.
 
-## Les options de précision :
+Les options de précision :
 
 ```-O``` : Détection du système d'exploitation (OS).
 ```-sV``` : Détection de la version des services.
 ```-A``` : Options complètes (OS, versions, scripts).
 ```-Pn``` : Ignore la vérification de présence (si la cible cache ses pings).
 
-## Le bruit (Vitesse) :
+Le bruit (Vitesse) :
 ```De T0 (très discret) à T4 (très rapide/agressif).```
 
-## Les sorties : 
+Les sorties : 
     ```--oN <filename> - Normal output
     -oX <filename> - XML output 
     -oG <filename> - grep-able output (useful for grep and awk)```-
