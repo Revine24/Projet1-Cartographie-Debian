@@ -3,7 +3,7 @@
 Bienvenue dans le guide d'utilisation de notre projet de cartographie réseau. Ce document vous explique comment utiliser notre script automatisé et comment vérifier les résultats.
 
 ### 1. Le but de l'outil
-Afin de simplifier l'utilisation de Nmap (qui possède beaucoup d'options complexes), nous avons créé un script interactif personnalisé. Son but est de vous guider pas à pas pour scanner une cible, découvrir les ports ouverts et identifier les services vulnérables sur notre réseau isolé.
+Afin de simplifier l'utilisation de Nmap, nous avons créé un script interactif personnalisé. Son but est de vous guider pas à pas pour scanner une cible, découvrir les ports ouverts et identifier les services vulnérables sur notre réseau isolé.
 
 ### 2. Comment le lancer
 Ouvrez un terminal sur votre machine d'attaque (par exemple notre machine Ubuntu UBU01 - 172.16.10.20), allez dans le dossier du projet, puis exécutez simplement le script avec les droits administrateur :
