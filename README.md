@@ -40,7 +40,6 @@ La connectivité est confirmée si vous arrivez sur la page par défaut d'Apache
 Dans votre terminal, tapez la commande ```nc 172.16.10.6 21```. La réponse du service est confirmée si le serveur vous renvoie la "bannière" (le message d'accueil) de vsFTPd, prouvant qu'il est prêt à l'emploi.
 
 ### 6. Détails des commandes Nmap utilisées
-
 Pour les utilisateurs avancés, voici les commandes et options que le script exécute automatiquement selon vos choix :
 
 ## Les types de scans principaux :
